@@ -3,20 +3,39 @@
 \usepackage{hyperref}
 \usepackage{array}
 
+% See here:
+% http://tex.stackexchange.com/questions/31186/how-to-move-a-paragraph-to-the-bottom-of-the-page-without-vspace
 \newenvironment{signatures}{\par\vspace*{\fill}}{\clearpage}
 
 \begin{document}
-\title{CS413 Embedded Systems ACE Group One Phase One Report}
-\author{Andi Anderson \and Fraser George \and Adam McGhie \and Aidan O'Grady
-\and Kristine Semjonova}
+\title{Brewduino}
+\author{
+	Andi Anderson
+	\and
+	Fraser George
+	\and
+	Adam McGhie
+	\and
+	Aidan O'Grady
+	\and
+	Kristine Semjonova
+}
 \date{}
 \maketitle
 
 \begin{signatures}
-\noindent We confirm and declare this report and the assignment work is entirely
+\noindent \textbf{CS413 Embedded Systems}
+
+\noindent \textbf{University of Strathclyde, Glasgow}\\
+
+\newpage
+
+We confirm and declare this report and the assignment work is entirely
 the product of our own efforts and we have not used or presented the work of
 others herein.\\
 
+% See here: 
+% http://tex.stackexchange.com/questions/179184/how-to-make-a-blank-underline
 Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 
 Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
@@ -31,6 +50,8 @@ Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$
 \tableofcontents
 \newpage
 
+% ------------------------------------------------------------------------------
+
 \section{Introduction}
 The initial scope of the assignment is to design and implement an embedded
 systems ‘gadget’ with the use of an Arduino and/or a Raspberry Pi.
@@ -43,8 +64,9 @@ sent to our Arduino controlled coffee pot, which will then create coffee on
 demand. In addition, we hope to include the functionality of adapting the
 Barduino, a project from a previous year, to supply milk or other substances to
 a user’s drink as well.
-
 \newpage
+
+% ------------------------------------------------------------------------------
 
 \section{Assessment of Capabilities}
 \subsection{Arduino}
@@ -92,17 +114,27 @@ hardware.
 \end{tabular}
 
 \subsection{Raspberry Pi}
-The Raspberry Pi is a single-board computer that is small in size (85.60 mm x
-53.98 mm) and was originally developed as an aid to teach the basics of computer
-science in schools. It commonly uses the Linux operating system, and has a
-Broadcom system on a chip, which includes an ARM1176JZFS, with floating point,
-running at 700 MHz, and a Videocore 4 GPU.It is also capable of 24 GFLOPS of
-general-purpose compute and features several texture filters and DMA
-infrastructure.
+The Raspberry Pi is a single-board computer with a small form factor (roughly
+the size of a credit card), which was created as an educational tool by the
+Raspberry Pi Foundation. 
 
-For the purposes of our project, we are using a Raspberry Pi 2 Model B to host a
-server and the Java Spring application that will be used to handle user requests
-for coffee.
+It commonly uses the Linux operating system, and has a Broadcom system on a
+chip, which includes an ARM1176JZFS, with floating point, running at 700 MHz,
+and a Videocore 4 GPU.It is also capable of 24 GFLOPS of general-purpose
+compute and features several texture filters and DMA infrastructure. The Pi’s OS
+must be booted from a microSD card though an external storage device can be used
+afterwards.
+
+The Pi is a more powerful device than the Arduino, since it is designed as a
+computer out of the box, and therefore and has more capabilities rather than
+just being a microcontroller. This makes it ideal for acting a middleman between
+the user and the Arduino.
+
+The Pi will be used to run the Java Spring application allowing it receive 
+requests from external clients. It can then handle their requests and interact 
+with the arduinos to operate the Coffee machine and Brewduino. This means our
+most likely course of action will be accessing the Pi through its IP address in
+the user's browser.
 
 \subsubsection{Specification}
 \begin{tabular}{>{\bfseries}r l}
@@ -146,12 +178,19 @@ have not claimed it, it has been deemed available for appropriation.
 \textbf{Price}: £0.00
 
 \textbf{Purchased From}: N/A
-
 \newpage
+
+% ------------------------------------------------------------------------------
 
 \section{Design}
 \subsection{Overall}
+
+\newpage
+
 \subsection{Hardware}
+
+\newpage
+
 \subsection{Software}
 There are three primary components of the software side of this project. Those
 are:
@@ -205,9 +244,31 @@ structure of this, a class diagram was deemed unsuitable for provision):
 		\item This class handles all communication with the Arduino, acting as a
 		middleman between the Arduino and the BrewduinoController.
 		\item The Arduino class will make use of a suitable framework, such as
-		JArduino\cite{JArduino} or ZXTX\cite{RXTX} to handle communication with Arduino.
+		JArduino\cite{JArduino} or ZXTX\cite{RXTX} to handle communication with
+		Arduino.
 	\end{itemize}
 \end{itemize}
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\section{Current Progress}
+When we started this assignment, the Brewduino was not our original concept. The
+initial idea was to create a Dalek (or Dalek like machine) whose camera could be
+viewed in a browser. However, we decided to go with the Brewduino project after
+it was suggested a couple of weeks later, since we felt it would be a more
+interesting project to tackle. This has had the
+
+So far, we have acquired the coffee pot and commandeered the Barduino for our
+project. In addition, an early start has been made on the Spring application,
+since some development was done as part of the research into its feasibility and
+suitability for the Brewduino.
+
+An attempt has been made on the disassembly of the coffee pot we are using to be
+connected to our Arduino, although that has not been completed (see the plan for
+the projected completion).
+
+
 \newpage
 
 \bibliographystyle{plain}
