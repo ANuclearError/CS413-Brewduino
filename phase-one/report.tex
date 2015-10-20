@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[11pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{array}
@@ -59,7 +59,7 @@ Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 
 Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 
-Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$
+Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 \end{bottomPara}
 \newpage
 \tableofcontents
@@ -78,7 +78,7 @@ the user to send requests for coffee over  internet for either immediate or
 future consumption. A server will be implemented to handle the requests to be
 sent to our Arduino controlled coffee pot, which will then create coffee on
 demand. In addition, we hope to include the functionality of adapting the
-Barduino, a project from a previous year, to supply milk or other substances to
+Barduino, a project from a previous year, to supply milk or other ingredients to
 a user’s drink as well.
 \newpage
 
@@ -89,7 +89,7 @@ a user’s drink as well.
 \subsection{Arduino}
 The Arduino is an open source microcontroller primarily aimed at electronics
 prototyping. It can interact with various components such as LEDs, motors, etc.
-Software can used to utilize these sensors, actuators and other electrical
+Software can be used to control these sensors, actuators and other electrical
 components, making it a popular product for use in such projects, especially in
 education.
 
@@ -110,9 +110,9 @@ as it meets the requirements for our project, listed below:
 \end{itemize}
 
 The primary disadvantages of the Arduino when compared to the Raspberry Pi is
-it's lack of network capabilities, and the Arduino's lack of processor power.
+its lack of network capabilities, and the Arduino's lack of processor power.
 The Pi allows us to run the necessary independent web server, and make it
-accessible to an external client. Due to this the Pi shall be do any
+accessible to an external client. Due to this the Pi shall be used to do any
 computationally intensive tasks and use the Arduino to interact with the other
 hardware.
 
@@ -126,7 +126,7 @@ hardware.
 \newpage
 
 \subsubsection{Specification}
-This based on the official specification sheet found here\cite{Arduino}:
+This is taken from the official specification sheet found here\cite{Arduino}:
 
 \begin{tabular}{>{\bfseries}r l}
 	Microcontroller & ATmega 318P \\
@@ -155,14 +155,14 @@ Raspberry Pi Foundation.
 
 It commonly uses the Linux operating system, and has a Broadcom system on a
 chip, which includes an ARM1176JZFS, with floating point, running at 700 MHz,
-and a Videocore 4 GPU.It is also capable of 24 GFLOPS of general-purpose
+and a Videocore 4 GPU. It is also capable of 24 GFLOPS of general-purpose
 compute and features several texture filters and DMA infrastructure. The Pi’s OS
 must be booted from a microSD card though an external storage device can be used
 afterwards.
 
 The Pi is a more powerful device than the Arduino, since it is designed as a
-computer out of the box, and therefore and has more capabilities rather than
-just being a microcontroller. This makes it ideal for acting a middleman between
+computer out of the box, and therefore has more capabilities rather than just
+being a microcontroller. This makes it ideal for acting as a middleman between
 the user and the Arduino.
 
 The Pi will be used to run the Java Spring application allowing it receive 
@@ -201,16 +201,13 @@ For a full specification, it can be found on the Raspberry Pi's website
 The development environment that we shall use for the Arduino is the Arduino
 Integrated Development Environment (or Arduino Software (IDE)). For development
 on the Pi we will be using Raspbian with a Java Spring application acting as our
-web service for the system.
+web service for the system. For software development, the Git version control
+and GitHub's issue tracking will be used for convenience.
 
-We all also be using a Git version control system in addition for easier
-transferring of work between group members. For the purposes of sharing other
-documents and files (for example, this report), a shared Google Drive folder was
-created to allow us all to add to each other's notes with ease before being
-formatted and organized properly.
-
-The creation of the Gannt chart outlining our plan using Smartsheet, which again
-allowed easy access for everyone to view progress.
+For the purposes of sharing documents such as the user manaual and technical
+guide, a Google Drive folder will be shared, allowing for the use of Google Docs
+allowing an easier way to simultaneously work on documents. Smartsheet will be
+used for the production of Gantt charts for the same reasons.
 
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
@@ -224,7 +221,7 @@ stage a full spreadsheet would be superfluous and thus omitted.
 \subsection{Coffee Pot}
 Since the HTCPCP is all about sending requests for coffee, a coffee pot is
 naturally required for the whole thing to work. We have decided on the Andrew
-James 1100 Watt DIgital Filter Coffee Maker.
+James 1100 Watt Digital Filter Coffee Maker.
 
 \textbf{Price}: £27.99
 
@@ -235,7 +232,7 @@ James 1100 Watt DIgital Filter Coffee Maker.
 \subsection{Barduino}
 As part of our project, we have found the potential of adapting the Barduino, a
 previous year’s Embedded Systems project into our own, for the use of supplying
-the coffee with milk and other condiments if desired. Since the project owners
+the coffee with milk and other ingredients if desired. Since the project owners
 have not claimed it, it has been deemed available for appropriation.
 
 \textbf{Price}: £0.00
@@ -253,13 +250,13 @@ have not claimed it, it has been deemed available for appropriation.
 \begin{figure}[H]
     \centering    
     \includegraphics[height=9cm, angle=270]{images/coffee}
-    \caption{The Barduino}
+    \caption{The Coffee Maker}
 \end{figure}
 
 \begin{figure}[H]
     \centering    
     \includegraphics[height=9cm]{images/barduino}
-    \caption{The Coffee Maker}
+    \caption{The Barduino}
 \end{figure}
 
 % ------------------------------------------------------------------------------
@@ -282,8 +279,9 @@ A high-res version is available at:
 % ------------------------------------------------------------------------------
 
 \subsection{Overall}
-The User goes onto the Brewudino webpage (available through Pi's IP address) and 
-fills out a form specifying the type of coffeee that they want. The Spring application wll recieve these requests. Accepted requests will be passed to
+The User goes onto the Brewduino webpage (available through Pi's IP address) and 
+fills out a form specifying the type of coffeee that they want. The Spring
+application wll recieve these requests. Accepted requests will be passed to
 Arduino, which will execute code determined by the form's values.
 
 \begin{figure}[H]
@@ -326,8 +324,8 @@ be filled.
 \subsubsection{Java Spring Service}
 The Raspberry Pi will be hosting a Java application utilising the Spring
 framework to allow for us to take the form submission and act upon it in Java.
-This has the advantages of allowing communication between Java application and
-the user, as well as between the application and Arduino.
+This has the advantages of allowing communication between the Java application
+and the user, as well as between the application and Arduino.
 
 The Java application is made up of four core classes, this system is a spin-off
 of Spring's guide on Handling Form Submissions\cite{SpringGuide} (due to the
@@ -347,8 +345,8 @@ structure of this, a class diagram was deemed unsuitable for provision):
 	\item BrewduinoController
 	\begin{itemize}
 		\item This class handles the requests sent from the user to the Pi, and
-		acts upon them. It will validate that the input is OK, and then
-		communicate with the Arduino to fulfill the request.
+		acts upon them. It will validate the user's input, and communicate with
+		the Arduino to fulfill the request.
 	\end{itemize}
 	\item Arduino
 	\begin{itemize}
@@ -369,7 +367,7 @@ When we started this assignment, the Brewduino was not our original concept. The
 initial idea was to create a Dalek (or Dalek like machine) whose camera could be
 viewed in a browser. However, we decided to go with the Brewduino project after
 it was suggested a couple of weeks later, since we felt it would be a more
-interesting project to tackle. This has had the
+interesting project to tackle compared to the Dalek.
 
 So far, we have acquired the coffee pot and commandeered the Barduino for our
 project. In addition, an early start has been made on the Spring application,
