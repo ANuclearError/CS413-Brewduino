@@ -2,10 +2,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
 
 % See here:
 % http://tex.stackexchange.com/questions/31186/how-to-move-a-paragraph-to-the-bottom-of-the-page-without-vspace
-\newenvironment{signatures}{\par\vspace*{\fill}}{\clearpage}
+\newenvironment{bottomPara}{\par\vspace*{\fill}}{\clearpage}
 
 \begin{document}
 \title{Brewduino}
@@ -23,11 +25,20 @@
 \date{}
 \maketitle
 
-\begin{signatures}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height = 6cm]{images/pi-logo}
+    \includegraphics[height = 6cm]{images/arduino-logo}
+\end{figure}
+
+\begin{bottomPara}
 \noindent \textbf{CS413 Embedded Systems}
 
-\noindent \textbf{University of Strathclyde, Glasgow}\\
+\noindent \textbf{Group One}
 
+\noindent \textbf{Phase One Report}
+
+\noindent \textbf{University of Strathclyde, Glasgow}
 \newpage
 
 We confirm and declare this report and the assignment work is entirely
@@ -45,7 +56,7 @@ Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$ \\
 
 Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$
-\end{signatures}
+\end{bottomPara}
 \newpage
 \tableofcontents
 \newpage
@@ -84,8 +95,8 @@ as it meets the requirements for our project, listed below:
 
 \begin{itemize}
 	\item Has sufficient size of onboard flash to hold the main program.
-	\item Can be easily extended through the use of shields for additional hardware
-	interface requirements.
+	\item Can be easily extended through the use of shields for additional
+	hardware interface requirements.
 	\item Uses 5V supply, meaning it does not require any power transformers to
 	be compatible with other components (i.e. Raspberry Pi).
 \end{itemize}
@@ -97,9 +108,20 @@ accessible to an external client. Due to this the Pi shall be do any
 computationally intensive tasks and use the Arduino to interact with the other
 hardware.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.3]{images/arduino-uno}
+    \caption{Arduino Uno.\cite{ArduinoImage}}
+    \label{fig:arduino_uno}
+\end{figure}
+
+\newpage
+
 \subsubsection{Specification}
+This based on the official specification sheet found here\cite{Arduino}:
+
 \begin{tabular}{>{\bfseries}r l}
-	Microcontroller & ATmega 318 \\
+	Microcontroller & ATmega 318P \\
 	Operational Voltage & 5V \\
 	Input Voltage & 7-12V \\
 	Input Voltage (Limits) & 6-20V \\
@@ -112,6 +134,8 @@ hardware.
 	EEPROM & 1KB \\
 	Clockspeed & 16 MHz \\
 \end{tabular}
+
+\newpage
 
 \subsection{Raspberry Pi}
 The Raspberry Pi is a single-board computer with a small form factor (roughly
@@ -135,6 +159,13 @@ requests from external clients. It can then handle their requests and interact
 with the arduinos to operate the Coffee machine and Brewduino. This means our
 most likely course of action will be accessing the Pi through its IP address in
 the user's browser.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.1]{images/pi}
+    \caption{A Raspberry Pi Model B.\cite{PiImage}}
+    \label{fig:pi}
+\end{figure}
 
 \subsubsection{Specification}
 \begin{tabular}{>{\bfseries}r l}
@@ -180,10 +211,29 @@ have not claimed it, it has been deemed available for appropriation.
 \textbf{Purchased From}: N/A
 \newpage
 
+\begin{figure}[H]
+    \centering    
+    \includegraphics[height=9cm, angle=270]{images/coffee}
+    \caption{The Barduino}
+\end{figure}
+
+\begin{figure}[H]
+    \centering    
+    \includegraphics[height=9cm]{images/barduino}
+    \caption{The Coffee Maker}
+\end{figure}
+
+\newpage
+
 % ------------------------------------------------------------------------------
 
 \section{Design}
 \subsection{Overall}
+\begin{figure}[H]
+    \centering    
+    \includegraphics{images/flowchart}
+    \caption{A flowchart defining how the overall system works}
+\end{figure}
 
 \newpage
 
