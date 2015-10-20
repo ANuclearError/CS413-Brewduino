@@ -62,12 +62,13 @@ Signature: $\rule{5cm}{0.15mm}$ \hfill Date: $\rule{3cm}{0.15mm}$
 \newpage
 
 % ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \section{Introduction}
 The initial scope of the assignment is to design and implement an embedded
-systems ‘gadget’ with the use of an Arduino and/or a Raspberry Pi.
+systems `gadget' with the use of an Arduino and/or a Raspberry Pi.
 
-After much deliberation and debate, we have decided to implement the Hyper Text 
+After a week of discussion, we have decided to implement the Hyper Text 
 Coffee Pot Control Protocol (HTCPCP)\cite{HTCPCP}, with a system that allows
 the user to send requests for coffee over  internet for either immediate or
 future consumption. A server will be implemented to handle the requests to be
@@ -78,12 +79,15 @@ a user’s drink as well.
 \newpage
 
 % ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \section{Assessment of Capabilities}
 \subsection{Arduino}
 The Arduino is an open source microcontroller primarily aimed at electronics
-prototyping. It can read and interact with various components such as LEDs,
-motors, etc.
+prototyping. It can interact with various components such as LEDs, motors, etc.
+Software can used to utilize these sensors, actuators and other electrical
+components, making it a popular product for use in such projects, especially in
+education.
 
 As it is a microcontroller it is designed to interact with analogue inputs of
 the outside world, which the Raspberry Pi does not have the ability to do as it
@@ -110,7 +114,7 @@ hardware.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.3]{images/arduino-uno}
+    \includegraphics[scale = 0.25]{images/arduino-uno}
     \caption{Arduino Uno.\cite{ArduinoImage}}
     \label{fig:arduino_uno}
 \end{figure}
@@ -133,9 +137,12 @@ This based on the official specification sheet found here\cite{Arduino}:
 	SRAM & 2KB \\
 	EEPROM & 1KB \\
 	Clockspeed & 16 MHz \\
+	Price & £21.97 \\
 \end{tabular}
 
 \newpage
+
+% ------------------------------------------------------------------------------
 
 \subsection{Raspberry Pi}
 The Raspberry Pi is a single-board computer with a small form factor (roughly
@@ -162,12 +169,15 @@ the user's browser.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.1]{images/pi}
+    \includegraphics[scale = 0.05]{images/pi}
     \caption{A Raspberry Pi Model B.\cite{PiImage}}
     \label{fig:pi}
 \end{figure}
 
 \subsubsection{Specification}
+For a full specification, it can be found on the Raspberry Pi's website
+\cite{PiSpecs}.
+
 \begin{tabular}{>{\bfseries}r l}
 	System on Chip & Broadcom BCM2836 \\
 	CPU & 900 MHz quad-core ARM Cortex-A7 \\
@@ -175,9 +185,13 @@ the user's browser.
 	Ethernet (Limits) & 10/100 Mbits/s \\
 	USB 2.0 & 4 Ports \\
 	On Board Storage & MicroSD slot \\
+	Price & £16.00 \\
 \end{tabular}
 
 \newpage
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \section{Development Environment}
 The development environment that we shall use for the Arduino is the Arduino
@@ -191,7 +205,18 @@ documents and files (for example, this report), a shared Google Drive folder was
 created to allow us all to add to each other's notes with ease before being
 formatted and organized properly.
 
+The creation of the Gannt chart outlining our plan using Smartsheet, which again
+allowed easy access for everyone to view progress.
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+
 \section{Additional Resources}
+Note: since we felt we had relatively few additional components, we felt at this
+stage a full spreadsheet would be superfluous and thus omitted.
+
+% ------------------------------------------------------------------------------
+
 \subsection{Coffee Pot}
 Since the HTCPCP is all about sending requests for coffee, a coffee pot is
 naturally required for the whole thing to work. We have decided on the Andrew
@@ -199,7 +224,10 @@ James 1100 Watt DIgital Filter Coffee Maker.
 
 \textbf{Price}: £27.99
 
-\textbf{Purchased From}: Amazon UK
+\textbf{Purchased from}: Amazon UK
+
+% ------------------------------------------------------------------------------
+
 \subsection{Barduino}
 As part of our project, we have found the potential of adapting the Barduino, a
 previous year’s Embedded Systems project into our own, for the use of supplying
@@ -208,7 +236,14 @@ have not claimed it, it has been deemed available for appropriation.
 
 \textbf{Price}: £0.00
 
-\textbf{Purchased From}: N/A
+\textbf{Purchased from}: N/A
+
+% ------------------------------------------------------------------------------
+
+\subsection{Servo Motor Controller}
+\textbf{Price}: £20.50
+
+\textbf{Purchased from}: Pimoroni
 \newpage
 
 \begin{figure}[H]
@@ -223,23 +258,45 @@ have not claimed it, it has been deemed available for appropriation.
     \caption{The Coffee Maker}
 \end{figure}
 
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+
+\section{Planning}
+A high-res version is available at:
+\begin{figure}[H]
+    \centering    
+    \includegraphics[angle=90, scale=0.5]{images/ProjectPlan}
+\end{figure}
+
 \newpage
 
 % ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 
 \section{Design}
+
+% ------------------------------------------------------------------------------
+
 \subsection{Overall}
+The User goes onto the Brewudino webpage (available through Pi's IP address) and 
+fills out a form specifying the type of coffeee that they want. The Spring application wll recieve these requests. Accepted requests will be passed to
+Arduino, which will execute code determined by the form's values.
+
 \begin{figure}[H]
     \centering    
-    \includegraphics{images/flowchart}
+    \includegraphics[scale=0.95]{images/flowchart}
     \caption{A flowchart defining how the overall system works}
 \end{figure}
 
 \newpage
 
+% ------------------------------------------------------------------------------
+
 \subsection{Hardware}
 
 \newpage
+
+% ------------------------------------------------------------------------------
 
 \subsection{Software}
 There are three primary components of the software side of this project. Those
@@ -257,7 +314,7 @@ when there is no coffee available.
 \subsubsection{Website}
 The website is relatively simple. In order to obtain coffee, all they need to
 do is complete the form that is provided to them. Given the current set up, the
-URL is likely to be off the form IP:8080/brewduino, where IP is the address of
+URL is likely to be of the form IP:8080/brewduino, where IP is the address of
 the Pi. The system will ideally provide the user information such as the amount
 of coffee available right now, and how many requests are currently in a queue to
 be filled.
@@ -300,6 +357,7 @@ structure of this, a class diagram was deemed unsuitable for provision):
 \end{itemize}
 \newpage
 
+% ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 
 \section{Current Progress}
