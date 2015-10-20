@@ -4,10 +4,14 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[parfill]{parskip}
 
 % See here:
 % http://tex.stackexchange.com/questions/31186/how-to-move-a-paragraph-to-the-bottom-of-the-page-without-vspace
 \newenvironment{bottomPara}{\par\vspace*{\fill}}{\clearpage}
+\setlength\parindent{0pt}
+\renewcommand*\rmdefault{phv}
+\setcounter{secnumdepth}{-2} % sections are level 1
 
 \begin{document}
 \title{Brewduino}
@@ -32,13 +36,13 @@
 \end{figure}
 
 \begin{bottomPara}
-\noindent \textbf{CS413 Embedded Systems}
+\textbf{CS413 Embedded Systems}
 
-\noindent \textbf{Group One}
+\textbf{Group One}
 
-\noindent \textbf{Phase One Report}
+\textbf{Phase One Report}
 
-\noindent \textbf{University of Strathclyde, Glasgow}
+\textbf{University of Strathclyde, Glasgow}
 \newpage
 
 We confirm and declare this report and the assignment work is entirely
