@@ -8,3 +8,8 @@ v0.0 - 2015-11-03
     
     - Created the basic structure of the project, creating the Driver, Input and
     Output classes. Currently the Driver merely prints out system info.
+
+v0.1 - 2015-11-03
+
+    - Added the basic server files to the project, currently no connection as of
+    yet.
