@@ -1,5 +1,6 @@
 package cs413.ace_group_01.brewduino_server;
 
+import cs413.ace_group_01.brewduino_server.server.Server;
 import cs413.ace_group_01.brewduino_server.view.Output;
 
 /**
@@ -24,5 +25,8 @@ public class Driver {
             System.out.println("\t" + author);
         }
         Output.lineBreak();
+
+        Server server = new Server();
+        server.run();
     }
 }
