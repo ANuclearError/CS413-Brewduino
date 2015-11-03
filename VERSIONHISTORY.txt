@@ -1,0 +1,10 @@
+BREWDUINO SERVER VERSION HISTORY
+
+CS413 ACE Phase Two
+
+================================================================================
+
+v0.0 - 2015-11-03
+    
+    - Created the basic structure of the project, creating the Driver, Input and
+    Output classes. Currently the Driver merely prints out system info.
