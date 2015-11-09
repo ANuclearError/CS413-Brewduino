@@ -1,4 +1,4 @@
-package cs413.brewduino_server;
+package cs413.brewduino_server.controller;
 
 import cs413.brewduino_server.view.Output;
 import org.springframework.boot.SpringApplication;
