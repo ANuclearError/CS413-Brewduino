@@ -14,9 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BrewduinoController {
 
+    @RequestMapping(value="/brewduino", method=RequestMethod.GET)
+    public String greetingForm(Model model) {
+        model.addAttribute("brewduino", new Request());
+        return "brewduino";
+    }
+
     @RequestMapping(value="/brewduino", method = RequestMethod.POST)
-    public String brewduinoSubmit(@ModelAttribute Request req, Model model) {
-        model.addAttribute("brewduino", req);
+    public String brewSubmit(@ModelAttribute Request request, Model model) {
+        model.addAttribute("brewduino", request);
         return "result";
     }
 }
