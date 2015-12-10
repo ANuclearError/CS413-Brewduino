@@ -16,13 +16,13 @@ public class BrewduinoController {
 
     @RequestMapping(value="/brewduino", method=RequestMethod.GET)
     public String brewForm(Model model) {
-        model.addAttribute("brewduino", new Request());
+        model.addAttribute("request", new Request());
         return "brewduino";
     }
 
     @RequestMapping(value="/brewduino", method = RequestMethod.POST)
     public String brewSubmit(@ModelAttribute Request request, Model model) {
-        model.addAttribute("brewduino", request);
+        model.addAttribute("request", request);
         return "result";
     }
 }

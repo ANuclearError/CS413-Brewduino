@@ -36,11 +36,6 @@ public class Request {
     private boolean hazelnutSyrup;
 
     /**
-     * The time the user
-     */
-    private Time time;
-
-    /**
      * Returns how much sugar the user wants.
      * @return sugar
      */
@@ -118,21 +113,5 @@ public class Request {
      */
     public void setHazelnutSyrup(boolean hazelnutSyrup) {
         this.hazelnutSyrup = hazelnutSyrup;
-    }
-
-    /**
-     * Returns the time when the user wants their coffee.
-     * @return time
-     */
-    public Time getTime() {
-        return time;
-    }
-
-    /**
-     * Sets the time the user wants their coffee.
-     * @param time - the time the user wants.
-     */
-    public void setTime(Time time) {
-        this.time = time;
     }
 }
