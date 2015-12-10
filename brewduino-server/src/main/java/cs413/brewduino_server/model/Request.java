@@ -18,7 +18,7 @@ public class Request {
     /**
      * The type of milk (if any) the user wants.
      */
-    private Milk milk;
+    private String milk;
 
     /**
      * Whether the user wants vanilla syrup/
@@ -55,7 +55,7 @@ public class Request {
      * Returns the type of milk the user wants.
      * @return milk type.
      */
-    public Milk getMilk() {
+    public String getMilk() {
         return milk;
     }
 
@@ -63,7 +63,7 @@ public class Request {
      * Sets the type of milk the user wants.
      * @param milk - the milk the user wants.
      */
-    public void setMilk(Milk milk) {
+    public void setMilk(String milk) {
         this.milk = milk;
     }
 
