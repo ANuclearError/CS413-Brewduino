@@ -2,9 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
+<script>
+	function getReceipt() {
+		var data = "<p>Black coffee";
+		if (${request.sugar} > 0) {
+			data += " with: <br/>" + ${request.sugar} + " sugars;";
+		}
+		if (${request.vanillaSyrup} == "true") {
+			data += " vanilla syrup;";
+		}
+		if (${request.caramelSyrup} == "true") {
+			data += " caramel syrup;";
+		}
+		if (${request.hazelnutSyrup} == "true") {
+			data += " hazelnut syrup;";
+		}
+		data += "</p>";
+		document.getElementById("Order").innerHTML = data;
+	}
+</script>
+
 <body>
-<h1>Result</h1>
+	<h1>Your Order:</h1>
+	<div id="Order">
+		<p th:text="'Sugar: ' + ${request.sugar}" />
+    	<p th:text="'Milk: ' + ${request.milk}" />
+    	<p th:text="'id: ' + ${request.vanillaSyrup}" />
+    	<p th:text="'content: ' + ${request.caramelSyrup}" />
+    	<p th:text="'id: ' + ${request.hazelnutSyrup}" />
+    </div>
 <a href="/brewduino">Need more coffee?</a>
 </body>
 </html>
