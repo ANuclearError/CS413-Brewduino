@@ -23,6 +23,18 @@ public class BrewduinoController {
     @RequestMapping(value="/brewduino", method = RequestMethod.POST)
     public String brewSubmit(@ModelAttribute Request request, Model model) {
         model.addAttribute("request", request);
+        brew(request);
         return "result";
+    }
+
+    /**
+     * Converts the request into a format more suitable for the Arduino, and
+     * passes it to the Arduino.
+     * @param request - the coffee the user wants.
+     */
+    private void brew(Request request) {
+        // TODO actually implement something there.
+        System.out.println("Request: " + request.toString());
+
     }
 }
