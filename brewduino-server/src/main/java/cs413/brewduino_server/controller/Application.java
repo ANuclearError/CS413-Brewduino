@@ -1,6 +1,5 @@
 package cs413.brewduino_server.controller;
 
-import cs413.brewduino_server.view.Output;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,15 +16,11 @@ public class Application {
 
         String[] authors = {"Andi Anderson", "Fraser George", "Adam McGhie",
                 "Aidan O'Grady", "Kristine Semjonova"};
-
         System.out.println(name + " " + "v" + version);
-        Output.minorLineBreak();
         System.out.println("AUTHORS:");
         for(String author : authors) {
             System.out.println("\t" + author);
         }
-        Output.lineBreak();
-
         SpringApplication.run(Application.class, args);
     }
 }
