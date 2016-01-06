@@ -1,5 +1,6 @@
 package cs413.brewduino_server.controller;
 
+import cs413.brewduino_server.model.Brewduino;
 import cs413.brewduino_server.model.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BrewduinoController {
 
+    private Brewduino brewduino = new Brewduino();
+
     @RequestMapping(value="/brewduino", method=RequestMethod.GET)
     public String brewForm(Model model) {
         model.addAttribute("request", new Request());
@@ -23,6 +26,7 @@ public class BrewduinoController {
     @RequestMapping(value="/brewduino", method = RequestMethod.POST)
     public String brewSubmit(@ModelAttribute Request request, Model model) {
         model.addAttribute("request", request);
+        System.out.println(request.toString());
         brew(request);
         return "result";
     }
@@ -33,8 +37,6 @@ public class BrewduinoController {
      * @param request - the coffee the user wants.
      */
     private void brew(Request request) {
-        // TODO actually implement something there.
-        System.out.println("Request: " + request.toString());
-
+        brewduino.writeData(request.toString());
     }
 }
