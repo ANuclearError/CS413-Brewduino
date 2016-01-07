@@ -3,17 +3,18 @@
 #include <SoftwareSerial.h>
 #include <AFMotor.h>
 
-#define PIN_SERVO (8)
+#define PIN_SERVO (6)
 #define strokeMax (100)
 // TODO: Change DISPENSE_OFFSET to be correct value for between the shots
-#define DISPENSE_OFFSET (100)
+#define DISPENSE_OFFSET (500)
+#define MAX_INPUT_LENGTH (6)
 
 AF_Stepper beltServo(200, 2); // A 200-step-per-revolution motor
 int position = 0;
 boolean chkString = false;
 String inputString = ""; // a string to hold incoming data
 boolean stringComplete = false;
-int vars[8] = {};
+int vars[MAX_INPUT_LENGTH] = {};
 
 Servo shotServo;
 
@@ -39,11 +40,11 @@ void loop()
     // if we get a valid byte, read analog ins:
     while (stringComplete) {
         Serial.println(inputString.length());
-        if(inputString.length() == 8){
+        if(inputString.length() == MAX_INPUT_LENGTH){
             parseInput(inputString);
             delay(30000);
             beltServo.step(DISPENSE_OFFSET, BACKWARD, SINGLE);
-            for(int i = 1; i < 8; i++){
+            for(int i = 1; i < MAX_INPUT_LENGTH; i++){
                 // Move servo into position
                 beltServo.step(i * DISPENSE_OFFSET, BACKWARD, SINGLE);
                 // If requested serve shot
@@ -115,8 +116,4 @@ void SetStrokePerc(float strokePercentage)
         int usec = 1000 + strokePercentage * ( 2000 - 1000 ) / 100.0 ;
         shotServo.writeMicroseconds( usec );
     }
-}
-void SetStrokeMM(int strokeReq,int strokeMax)
-{
-    SetStrokePerc( ((float)strokeReq) / strokeMax );
 }
