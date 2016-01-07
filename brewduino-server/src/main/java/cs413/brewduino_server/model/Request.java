@@ -114,4 +114,38 @@ public class Request {
     public void setHazelnutSyrup(boolean hazelnutSyrup) {
         this.hazelnutSyrup = hazelnutSyrup;
     }
+
+    @Override
+    public String toString() {
+        String string = "" + sugar; // The message to be sent to Arduino
+        int check = 0; // Minor sanity check
+
+        switch(milk) {
+            case "no milk":
+                string += "00"; // No milk should be dispensed
+                break;
+            case "semi-skimmed":
+                string += "10"; // Only semi-skimmed milk should be dispensed.
+                check++;
+                break;
+            case "skimmed":
+                string += "01"; // Only skimmed milk should be dispensed.
+                check++;
+                break;
+        }
+        if(isVanillaSyrup()) {
+            string += "1"; // Dispense some vanilla syrup.
+            check++;
+        } else {
+            string += "0";
+        }
+        if(isCaramelSyrup()) {
+            string += "1"; // Dispense some caramel syrup.
+            check++;
+        } else {
+            string += "0";
+        }
+        string += check;
+        return string;
+    }
 }
