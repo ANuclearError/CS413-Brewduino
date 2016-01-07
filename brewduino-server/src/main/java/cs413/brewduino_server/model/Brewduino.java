@@ -59,6 +59,7 @@ public class Brewduino implements SerialPortEventListener {
      * Opens the connection to the serial port if it can be found.
      */
     public void initialize() {
+        System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
         CommPortIdentifier portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -123,7 +124,6 @@ public class Brewduino implements SerialPortEventListener {
                 System.err.println(e.toString());
             }
         }
-        // Ignore all the other eventTypes, but you should consider the other ones.
     }
 
     /**
