@@ -14,9 +14,14 @@ Science, 2015-16 at the University of Strathclyde Glasgow.
 
 ## Author
 Andi Anderson
+
 Fraser George
+
 Adam McGhie
+
 Aidan O'Grady
+
 Kristine Semjonova
 
 ## License
+Copyright 2015-2016
