@@ -22,7 +22,7 @@ public class Brewduino implements SerialPortEventListener{
     private SerialPort serialPort;
 
     public Brewduino() {
-        String port = "/dev/ttyACM0";
+        String port = "COM3";
         serialPort = new SerialPort(port);
         System.out.println("Attempting port " + port);
         try {
