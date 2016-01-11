@@ -31,11 +31,6 @@ public class Request {
     private boolean caramelSyrup;
 
     /**
-     * Whether the user wants hazelnut syrup/
-     */
-    private boolean hazelnutSyrup;
-
-    /**
      * Returns how much sugar the user wants.
      * @return sugar
      */
@@ -97,22 +92,6 @@ public class Request {
      */
     public void setCaramelSyrup(boolean caramelSyrup) {
         this.caramelSyrup = caramelSyrup;
-    }
-
-    /**
-     * Returns whether or not the user wants hazelnut syrup.
-     * @return hazelnutSyrup
-     */
-    public boolean isHazelnutSyrup() {
-        return hazelnutSyrup;
-    }
-
-    /**
-     * Sets whether or not the user wants hazelnut syrup.
-     * @return hazelnutSyrup
-     */
-    public void setHazelnutSyrup(boolean hazelnutSyrup) {
-        this.hazelnutSyrup = hazelnutSyrup;
     }
 
     @Override
