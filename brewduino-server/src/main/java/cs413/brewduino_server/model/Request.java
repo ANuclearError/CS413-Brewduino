@@ -106,35 +106,22 @@ public class Request {
 
     @Override
     public String toString() {
-        String string = "" + sugar; // The message to be sent to Arduino
-        int check = 0; // Minor sanity check
+    	string = "Black coffee";
+        if (!(milk.equals("no milk")) || (sugar > 0) || vanillaSyrup || caramelSyrup) 
+        	string += " with:\n";
+        
+        if (!(milk.equals("no milk"))) 
+        	string += "-\t " + milk + "milk\n";
+        
+        if (sugar > 0) 
+        	string += "-\t" + sugar + " sugars\n";
 
-        switch(milk) {
-            case "no milk":
-                string += "00"; // No milk should be dispensed
-                break;
-            case "semi-skimmed":
-                string += "10"; // Only semi-skimmed milk should be dispensed.
-                check++;
-                break;
-            case "skimmed":
-                string += "01"; // Only skimmed milk should be dispensed.
-                check++;
-                break;
-        }
-        if(isVanillaSyrup()) {
-            string += "1"; // Dispense some vanilla syrup.
-            check++;
-        } else {
-            string += "0";
-        }
-        if(isCaramelSyrup()) {
-            string += "1"; // Dispense some caramel syrup.
-            check++;
-        } else {
-            string += "0";
-        }
-        string += check;
+        if (vanillaSyrup) 
+        	string += "-\t vanilla syrup\n";
+        
+        if (caramelSyrup)
+        	string += "-\t caramel syrup\n";
+        
         return string;
     }
 }
