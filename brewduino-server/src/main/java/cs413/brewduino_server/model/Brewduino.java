@@ -34,6 +34,7 @@ public class Brewduino implements SerialPortEventListener{
             System.out.println("Port opened: " + dispensePort.openPort());
             System.out.println("Params setted: " + dispensePort.setParams(9600, 8, 1, 0));
             motorPort.addEventListener(this);
+            dispensePort.addEventListener(this);
             Thread.sleep(1500);
         } catch (SerialPortException e) {
             e.printStackTrace();
@@ -42,17 +43,70 @@ public class Brewduino implements SerialPortEventListener{
         }
     }
 
-    public void writeString(String msg) {
+    public void writeString(String msg, SerialPort port) {
         try {
-            motorPort.writeBytes(msg.getBytes());
-            System.out.println("Outgoing: " + msg);
+            port.writeBytes(msg.getBytes());
+            System.out.println("Outgoing: " + msg + " to " + port.getPortName());
         } catch (SerialPortException e) {
             e.printStackTrace();
         }
     }
 
     public void brew(Request request) {
+        int coffeeSleep = 10000;
+        new Thread(() -> {
+            try {
+                dispensePort.writeInt(1);
+                Thread.sleep(coffeeSleep);
+                moveMotor(); // Now over sugar
+                for(int i = 0; i < request.getSugar(); i++) {
+                    dispense();
+                }
+                moveMotor(); // Now on semi-skimmed milk
+                switch(request.getMilk()) {
+                    case "no milk":
+                        moveMotor(); // Now on skimmed milk
+                        moveMotor(); // Now on first syrup
+                        break;
+                    case "semi-skimmed":
+                        dispense();
+                        moveMotor(); // Now on skimmed milk
+                        moveMotor(); // Now on first syrup
+                        break;
+                    case "skimmed":
+                        moveMotor(); // Now on skimmed milk
+                        dispense();
+                        moveMotor(); // Now on first syrup
+                        break;
+                }
 
+                if(request.isVanillaSyrup()) {
+                    dispense();
+                }
+                moveMotor(); // Now on caramel syrup
+                if(request.isCaramelSyrup()) {
+                    dispense();
+                }
+                moveMotor();
+
+            } catch (SerialPortException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void moveMotor() throws SerialPortException, InterruptedException {
+        int motorSleep = 5000;
+        motorPort.writeInt(1);
+        Thread.sleep(motorSleep);
+    }
+
+    private void dispense() throws SerialPortException, InterruptedException {
+        int dispenseSleep = 2500;
+        dispensePort.writeInt(1);
+        Thread.sleep(dispenseSleep);
     }
 
     @Override
