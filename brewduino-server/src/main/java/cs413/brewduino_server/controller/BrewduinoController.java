@@ -25,6 +25,7 @@ public class BrewduinoController {
 
     @RequestMapping(value="/brewduino", method = RequestMethod.POST)
     public String brewSubmit(@ModelAttribute Request request, Model model) {
+        request.setString(request.toString());
         model.addAttribute("request", request);
         brewduino.brew(request);
         return "result";

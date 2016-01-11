@@ -52,7 +52,12 @@ public class Brewduino implements SerialPortEventListener{
     }
 
     public void brew(Request request) {
-        
+
+    }
+
+    @Override
+    public void serialEvent(SerialPortEvent serialPortEvent) {
+
     }
 }
 

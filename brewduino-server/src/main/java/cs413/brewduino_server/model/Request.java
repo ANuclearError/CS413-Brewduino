@@ -30,6 +30,8 @@ public class Request {
      */
     private boolean caramelSyrup;
 
+    private String string;
+
     /**
      * Returns how much sugar the user wants.
      * @return sugar
@@ -92,6 +94,14 @@ public class Request {
      */
     public void setCaramelSyrup(boolean caramelSyrup) {
         this.caramelSyrup = caramelSyrup;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
+    public String getString() {
+        return string;
     }
 
     @Override

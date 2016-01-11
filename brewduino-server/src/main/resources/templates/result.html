@@ -6,35 +6,12 @@
 </head>
 
 <script>
-	function getReceipt() {
-		var milk = ${request.milk};
-		var sugar = ${request.sugar};
-		var vanillaSyrup = ${request.vanillaSyrup};
-		var caramelSyrup = ${request.caramelSyrup};
-		var data = "<p>Black coffee";
-		if ((milk != "no milk") || (sugar > 0) || vanillaSyrup || caramelSyrup) {
-			data += " with: <br/>";
-		if (milk != "no milk") {
-			data += "-	" + milk + " milk";
-		}
-		if (sugar > 0) {
-			data += "-	" + sugar + " sugars";
-		}
-		if (${request.vanillaSyrup} == "true") {
-			data += "-	vanilla syrup";
-		}
-		if (${request.caramelSyrup} == "true") {
-			data += "-	caramel syrup";
-		}
-		data += "</p>";
-		document.getElementById("Order").innerHTML = data;
-	}
 </script>
 
 <body>
 	<h1>Your Order:</h1>
 	<div id="Order">
-		getReceipt();
+		<p th:text="${request.string}"></p>
 	</div>
 	<a href="/brewduino">Need more coffee?</a>
 </body>
