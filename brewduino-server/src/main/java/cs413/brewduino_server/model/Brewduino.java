@@ -56,11 +56,11 @@ public class Brewduino implements SerialPortEventListener{
         int coffeeSleep = 10000;
         new Thread(() -> {
             try {
-                dispensePort.writeInt(1);
+                dispenseCoffee();
                 Thread.sleep(coffeeSleep);
                 moveMotor(); // Now over sugar
                 for(int i = 0; i < request.getSugar(); i++) {
-                    dispense();
+                    dispenseShot();
                 }
                 moveMotor(); // Now on semi-skimmed milk
                 switch(request.getMilk()) {
@@ -69,23 +69,23 @@ public class Brewduino implements SerialPortEventListener{
                         moveMotor(); // Now on first syrup
                         break;
                     case "semi-skimmed":
-                        dispense();
+                        dispenseShot();
                         moveMotor(); // Now on skimmed milk
                         moveMotor(); // Now on first syrup
                         break;
                     case "skimmed":
                         moveMotor(); // Now on skimmed milk
-                        dispense();
+                        dispenseShot();
                         moveMotor(); // Now on first syrup
                         break;
                 }
 
                 if(request.isVanillaSyrup()) {
-                    dispense();
+                    dispenseShot();
                 }
                 moveMotor(); // Now on caramel syrup
                 if(request.isCaramelSyrup()) {
-                    dispense();
+                    dispenseShot();
                 }
                 moveMotor();
 
@@ -103,12 +103,17 @@ public class Brewduino implements SerialPortEventListener{
         Thread.sleep(motorSleep);
     }
 
-    private void dispense() throws SerialPortException, InterruptedException {
-        int dispenseSleep = 2500;
+    private void dispenseCoffee() throws SerialPortException, InterruptedException {
+        int dispenseSleep = 5000;
         dispensePort.writeInt(1);
         Thread.sleep(dispenseSleep);
     }
 
+    private void dispenseShot() throws SerialPortException, InterruptedException {
+        int dispenseSleep = 5000;
+        dispensePort.writeInt(2);
+        Thread.sleep(dispenseSleep);
+    }
     @Override
     public void serialEvent(SerialPortEvent serialPortEvent) {
 
