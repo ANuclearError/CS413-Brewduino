@@ -3,12 +3,14 @@
 <head>
     <title>Result</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{style.css}"/>
 </head>
 
 <body>
 	<h1>Your Order:</h1>
 	<div id="Order">
 		<p th:text="${request.string}"></p>
+		<p>Your order is being made!</p>
 	</div>
 	<a href="/brewduino">Need more coffee?</a>
 </body>

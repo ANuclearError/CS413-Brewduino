@@ -21,15 +21,18 @@ public class Request {
     private String milk;
 
     /**
-     * Whether the user wants vanilla syrup/
+     * Whether the user wants vanilla syrup
      */
     private boolean vanillaSyrup;
 
     /**
-     * Whether the user wants caramel syrup/
+     * Whether the user wants caramel syrup
      */
     private boolean caramelSyrup;
 
+    /**
+     * Human readable string representation
+     */
     private String string;
 
     /**
@@ -111,7 +114,7 @@ public class Request {
         	string += " with:\n";
         
         if (!(milk.equals("no milk"))) 
-        	string += "-\t " + milk + "milk\n";
+        	string += "-\t " + milk + " milk\n";
         
         if (sugar > 0) 
         	string += "-\t" + sugar + " sugars\n";
