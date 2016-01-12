@@ -103,13 +103,13 @@ public class Brewduino implements SerialPortEventListener{
     }
 
     private synchronized void dispenseCoffee() throws SerialPortException, InterruptedException {
-        int dispenseSleep = 5000;
+        int dispenseSleep = 360000;
         dispensePort.writeString("1\n");
         Thread.sleep(dispenseSleep);
     }
 
     private synchronized void dispenseShot() throws SerialPortException, InterruptedException {
-        int dispenseSleep = 15000;
+        int dispenseSleep = 25000;
         dispensePort.writeString("2\n");
         Thread.sleep(dispenseSleep);
     }

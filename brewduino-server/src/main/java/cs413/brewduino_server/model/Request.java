@@ -111,19 +111,19 @@ public class Request {
     public String toString() {
         string = "Black coffee";
         if (milk || (sugar > 0) || vanillaSyrup || caramelSyrup)
-            string += " with:<br/>";
+            string += " with: \n";
 
         if (milk)
-            string += "-\t " + " milk<br/>";
+            string += "-\t " + " milk; \n";
 
         if (sugar > 0)
-            string += "-\t" + sugar + " sugar(s)<br/>";
+            string += "-\t" + sugar + " sugar(s); \n";
 
         if (vanillaSyrup)
-            string += "-\t vanilla syrup<br/>";
+            string += "-\t vanilla syrup; \n";
 
         if (caramelSyrup)
-            string += "-\t caramel syrup<br/>";
+            string += "-\t caramel syrup; \n";
 
         return string;
     }
