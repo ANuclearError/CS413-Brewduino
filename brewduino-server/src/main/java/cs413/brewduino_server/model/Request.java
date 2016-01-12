@@ -23,12 +23,7 @@ public class Request {
     /**
      * Whether the user wants vanilla syrup
      */
-    private boolean vanillaSyrup;
-
-    /**
-     * Whether the user wants caramel syrup
-     */
-    private boolean caramelSyrup;
+    private boolean syrup;
 
     /**
      * Human readable string representation
@@ -71,32 +66,16 @@ public class Request {
      * Returns whether or not the user wants vanilla syrup.
      * @return vanillaSyrup
      */
-    public boolean isVanillaSyrup() {
-        return vanillaSyrup;
+    public boolean isSyrup() {
+        return syrup;
     }
 
     /**
      * Sets whether or not the user wants vanilla syrup.
      * @return vanillaSyrup
      */
-    public void setVanillaSyrup(boolean vanillaSyrup) {
-        this.vanillaSyrup = vanillaSyrup;
-    }
-
-    /**
-     * Returns whether or not the user wants caramel syrup.
-     * @return caramelSyrup
-     */
-    public boolean isCaramelSyrup() {
-        return caramelSyrup;
-    }
-
-    /**
-     * Sets whether or not the user wants caramel syrup.
-     * @return caramelSyrup
-     */
-    public void setCaramelSyrup(boolean caramelSyrup) {
-        this.caramelSyrup = caramelSyrup;
+    public void setSyrup(boolean setSyrup) {
+        this.syrup = syrup;
     }
 
     public void setString(String string) {
@@ -110,21 +89,18 @@ public class Request {
     @Override
     public String toString() {
     	string = "Black coffee";
-        if (!(milk.equals("no milk")) || (sugar > 0) || vanillaSyrup || caramelSyrup) 
+        if (!(milk.equals("no milk")) || (sugar > 0) || syrup)
         	string += " with:\n";
         
         if (!(milk.equals("no milk"))) 
         	string += "-\t " + milk + " milk\n";
         
         if (sugar > 0) 
-        	string += "-\t" + sugar + " sugars\n";
+        	string += "-\t" + sugar + " sugar(s)\n";
 
-        if (vanillaSyrup) 
-        	string += "-\t vanilla syrup\n";
-        
-        if (caramelSyrup)
-        	string += "-\t caramel syrup\n";
-        
+        if (syrup)
+        	string += "-\t syrup\n";
+
         return string;
     }
 }

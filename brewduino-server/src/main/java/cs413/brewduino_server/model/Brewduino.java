@@ -17,6 +17,8 @@ public class Brewduino implements SerialPortEventListener{
     private SerialPort motorPort;
     private SerialPort dispensePort;
 
+    private boolean running = false;
+
     public Brewduino() {
         String mPort = "/dev/ttyACM0";
         String dPort = "/dev/ttyACM1";
@@ -43,80 +45,99 @@ public class Brewduino implements SerialPortEventListener{
         }
     }
 
-    public void writeString(String msg, SerialPort port) {
-        try {
-            port.writeBytes(msg.getBytes());
-            System.out.println("Outgoing: " + msg + " to " + port.getPortName());
-        } catch (SerialPortException e) {
-            e.printStackTrace();
+    public void brew(Request request) {
+        if(!running) {
+            new Thread(() -> {
+                try {
+                    running = true;
+                    System.out.println("Dispensing coffee");
+                    dispenseCoffee();
+                    System.out.println("Moving to sugar");
+                    moveMotor(); // Now over sugar
+                    moveMotor(); // Now over sugar
+                    for (int i = 0; i < request.getSugar(); i++) {
+                        System.out.println("Dispensing sugar");
+                        dispenseShot();
+                    }
+                    System.out.println("Moving to semi-skimmed milk");
+                    moveMotor(); // Now on semi-skimmed milk
+                    switch (request.getMilk()) {
+                        case "no milk":
+                            System.out.println("Moving to skimmed milk");
+                            moveMotor(); // Now on skimmed milk
+                            System.out.println("Moving to first syrup");
+                            moveMotor(); // Now on first syrup
+                            break;
+                        case "semi-skimmed":
+                            System.out.println("Dispensing semi-skimmed milk");
+                            dispenseShot();
+                            System.out.println("Moving to skimmed milk");
+                            moveMotor(); // Now on skimmed milk
+                            System.out.println("Moving to first syrup");
+                            moveMotor(); // Now on first syrup
+                            break;
+                        case "skimmed":
+                            System.out.println("Moving to skimmed milk");
+                            moveMotor(); // Now on skimmed milk
+                            System.out.println("Dispensing skimmed milk");
+                            dispenseShot();
+                            System.out.println("Moving to first syrup");
+                            moveMotor(); // Now on first syrup
+                            break;
+                    }
+
+                    if (request.isVanillaSyrup()) {
+                        System.out.println("Dispensing first syrup");
+                        dispenseShot();
+                    }
+                    System.out.println("Moving back to beginning");
+                    moveMotor();
+                    running = false;
+
+                } catch (SerialPortException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        } else {
+            System.out.println("Busy");
         }
     }
 
-    public void brew(Request request) {
-        int coffeeSleep = 10000;
-        new Thread(() -> {
-            try {
-                dispenseCoffee();
-                Thread.sleep(coffeeSleep);
-                moveMotor(); // Now over sugar
-                for(int i = 0; i < request.getSugar(); i++) {
-                    dispenseShot();
-                }
-                moveMotor(); // Now on semi-skimmed milk
-                switch(request.getMilk()) {
-                    case "no milk":
-                        moveMotor(); // Now on skimmed milk
-                        moveMotor(); // Now on first syrup
-                        break;
-                    case "semi-skimmed":
-                        dispenseShot();
-                        moveMotor(); // Now on skimmed milk
-                        moveMotor(); // Now on first syrup
-                        break;
-                    case "skimmed":
-                        moveMotor(); // Now on skimmed milk
-                        dispenseShot();
-                        moveMotor(); // Now on first syrup
-                        break;
-                }
-
-                if(request.isVanillaSyrup()) {
-                    dispenseShot();
-                }
-                moveMotor(); // Now on caramel syrup
-                if(request.isCaramelSyrup()) {
-                    dispenseShot();
-                }
-                moveMotor();
-
-            } catch (SerialPortException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    private void moveMotor() throws SerialPortException, InterruptedException {
-        int motorSleep = 5000;
-        motorPort.writeInt(1);
+    private synchronized void moveMotor() throws SerialPortException, InterruptedException {
+        int motorSleep = 10000;
+        motorPort.writeString("1\n");
         Thread.sleep(motorSleep);
     }
 
-    private void dispenseCoffee() throws SerialPortException, InterruptedException {
+    private synchronized void dispenseCoffee() throws SerialPortException, InterruptedException {
         int dispenseSleep = 5000;
-        dispensePort.writeInt(1);
+        dispensePort.writeString("1\n");
         Thread.sleep(dispenseSleep);
     }
 
-    private void dispenseShot() throws SerialPortException, InterruptedException {
-        int dispenseSleep = 5000;
-        dispensePort.writeInt(2);
+    private synchronized void dispenseShot() throws SerialPortException, InterruptedException {
+        int dispenseSleep = 15000;
+        dispensePort.writeString("2\n");
         Thread.sleep(dispenseSleep);
     }
+
+
     @Override
     public void serialEvent(SerialPortEvent serialPortEvent) {
-
+        if (serialPortEvent.isRXCHAR()) {//If data is available
+            try {
+                String dString = dispensePort.readString();
+                String mString = motorPort.readString();
+                if(dString != null)
+                    System.out.println("Dispense port: " + dString);
+                if(mString != null)
+                    System.out.println("Motor port: " + mString);
+            } catch (SerialPortException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
