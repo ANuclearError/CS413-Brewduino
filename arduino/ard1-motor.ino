@@ -26,8 +26,6 @@ void setup() {
     Serial.println("REDY!");
 
     AFMS.begin();  // create with the default frequency 1.6KHz
-    //AFMS.begin(1000);  // OR with a different frequency, say 1KHz
-    pinMode(2, INPUT);   // digital sensor is on digital pin 2
     inputString.reserve(200); // Hold 200 bytes for input string
 
     myMotor->setSpeed(10);  // 10 rpm  
