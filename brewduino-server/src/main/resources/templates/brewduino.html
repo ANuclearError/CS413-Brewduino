@@ -16,15 +16,12 @@
         <option value="2">2</option>
         <option value="3">3</option>
     </select><br/>
-    Milk&nbsp;
-    <select name="milk" th:field="*{milk}">
-        <option value="no milk">No milk</option>
-        <option value="skimmed">Skimmed</option>
-        <option value="semi-skimmed">Semi-Skimmed</option>
-    </select><br/>
+    <input type="checkbox" name="milk" th:field="*{milk}"/>Milk<br/>
 
     <h2>EXTRAS:</h2>
-    <input type="checkbox" name="extra" th:field="*{syrup}"/>Syrup<br/>
+    <input type="checkbox" name="extra" th:field="*{vanillaSyrup}"/>Vanilla Syrup<br/>
+    <input type="checkbox" name="extra" th:field="*{caramelSyrup}"/>Caramel Syrup<br/>
+
     <input type="submit" value="BREW"/>
 </form>
 </body>

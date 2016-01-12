@@ -18,12 +18,17 @@ public class Request {
     /**
      * The type of milk (if any) the user wants.
      */
-    private String milk;
+    private boolean milk;
 
     /**
      * Whether the user wants vanilla syrup
      */
-    private boolean syrup;
+    private boolean vanillaSyrup;
+
+    /**
+     * Whether the user wants caramel syrup
+     */
+    private boolean caramelSyrup;
 
     /**
      * Human readable string representation
@@ -50,7 +55,7 @@ public class Request {
      * Returns the type of milk the user wants.
      * @return milk type.
      */
-    public String getMilk() {
+    public boolean isMilk() {
         return milk;
     }
 
@@ -58,7 +63,7 @@ public class Request {
      * Sets the type of milk the user wants.
      * @param milk - the milk the user wants.
      */
-    public void setMilk(String milk) {
+    public void setMilk(boolean milk) {
         this.milk = milk;
     }
 
@@ -66,16 +71,32 @@ public class Request {
      * Returns whether or not the user wants vanilla syrup.
      * @return vanillaSyrup
      */
-    public boolean isSyrup() {
-        return syrup;
+    public boolean isVanillaSyrup() {
+        return vanillaSyrup;
     }
 
     /**
      * Sets whether or not the user wants vanilla syrup.
      * @return vanillaSyrup
      */
-    public void setSyrup(boolean setSyrup) {
-        this.syrup = syrup;
+    public void setVanillaSyrup(boolean vanillaSyrup) {
+        this.vanillaSyrup = vanillaSyrup;
+    }
+
+    /**
+     * Returns whether or not the user wants caramel syrup.
+     * @return caramelSyrup
+     */
+    public boolean isCaramelSyrup() {
+        return caramelSyrup;
+    }
+
+    /**
+     * Sets whether or not the user wants caramel syrup.
+     * @return caramelSyrup
+     */
+    public void setCaramelSyrup(boolean caramelSyrup) {
+        this.caramelSyrup = caramelSyrup;
     }
 
     public void setString(String string) {
@@ -88,19 +109,23 @@ public class Request {
 
     @Override
     public String toString() {
-    	string = "Black coffee";
-        if (!(milk.equals("no milk")) || (sugar > 0) || syrup)
-        	string += " with:\n";
-        
-        if (!(milk.equals("no milk"))) 
-        	string += "-\t " + milk + " milk\n";
-        
-        if (sugar > 0) 
-        	string += "-\t" + sugar + " sugar(s)\n";
+        string = "Black coffee";
+        if (milk || (sugar > 0) || vanillaSyrup || caramelSyrup)
+            string += " with:<br/>";
 
-        if (syrup)
-        	string += "-\t syrup\n";
+        if (milk)
+            string += "-\t " + " milk<br/>";
+
+        if (sugar > 0)
+            string += "-\t" + sugar + " sugar(s)<br/>";
+
+        if (vanillaSyrup)
+            string += "-\t vanilla syrup<br/>";
+
+        if (caramelSyrup)
+            string += "-\t caramel syrup<br/>";
 
         return string;
     }
+
 }

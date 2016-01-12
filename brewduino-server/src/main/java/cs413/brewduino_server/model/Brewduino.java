@@ -53,47 +53,38 @@ public class Brewduino implements SerialPortEventListener{
                     System.out.println("Dispensing coffee");
                     dispenseCoffee();
                     System.out.println("Moving to sugar");
-                    moveMotor(); // Now over sugar
-                    moveMotor(); // Now over sugar
+                    moveMotor();
+                    moveMotor();
+
                     for (int i = 0; i < request.getSugar(); i++) {
                         System.out.println("Dispensing sugar");
                         dispenseShot();
                     }
-                    System.out.println("Moving to semi-skimmed milk");
+                    System.out.println("Moving to milk");
                     moveMotor(); // Now on semi-skimmed milk
-                    switch (request.getMilk()) {
-                        case "no milk":
-                            System.out.println("Moving to skimmed milk");
-                            moveMotor(); // Now on skimmed milk
-                            System.out.println("Moving to first syrup");
-                            moveMotor(); // Now on first syrup
-                            break;
-                        case "semi-skimmed":
-                            System.out.println("Dispensing semi-skimmed milk");
-                            dispenseShot();
-                            System.out.println("Moving to skimmed milk");
-                            moveMotor(); // Now on skimmed milk
-                            System.out.println("Moving to first syrup");
-                            moveMotor(); // Now on first syrup
-                            break;
-                        case "skimmed":
-                            System.out.println("Moving to skimmed milk");
-                            moveMotor(); // Now on skimmed milk
-                            System.out.println("Dispensing skimmed milk");
-                            dispenseShot();
-                            System.out.println("Moving to first syrup");
-                            moveMotor(); // Now on first syrup
-                            break;
+
+                    if (request.isMilk()) {
+                        System.out.println("Dispensing milk");
+                        dispenseShot();
                     }
+                    System.out.println("Moving to first syrup");
+                    moveMotor();
 
                     if (request.isVanillaSyrup()) {
                         System.out.println("Dispensing first syrup");
                         dispenseShot();
                     }
+                    System.out.println("Moving to second syrup");
+                    moveMotor();
+
+                    if (request.isVanillaSyrup()) {
+                        System.out.println("Dispensing second syrup");
+                        dispenseShot();
+                    }
                     System.out.println("Moving back to beginning");
                     moveMotor();
-                    running = false;
 
+                    running = false;
                 } catch (SerialPortException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
