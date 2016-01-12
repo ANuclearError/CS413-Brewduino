@@ -11,9 +11,13 @@ boolean stringComplete = false;  // whether the string is complete
 void setup() {
   // initialize serial:
   Serial.begin(9600);
+  shotServo.attach(PIN_SERVO);
+  pinMode(PIN_RELAY, OUTPUT);
   // reserve 200 bytes for the inputString:
   inputString.reserve(200);
-  digitalWrite(PIN_RELAY, LOW);
+  SetStrokePerc(40);
+  delay(5000);
+  Serial.println("DREDT!");
 }
 
 void loop() {
