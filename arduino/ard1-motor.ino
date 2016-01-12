@@ -1,13 +1,3 @@
-/* 
-This is a test sketch for the Adafruit assembled Motor Shield for Arduino v2
-It won't work with v1.x motor shields! Only for the v2's with built in PWM
-control
-
-For use with the Adafruit Motor Shield v2 
----->  http://www.adafruit.com/products/1438
-*/
-
-
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_PWMServoDriver.h"
@@ -22,20 +12,18 @@ Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 // Connect a stepper motor with 200 steps per revolution (1.8 degree)
 // to motor port #2 (M3 and M4)
 Adafruit_StepperMotor *myMotor = AFMS.getStepper(200, 2);
- 
+
 #include <Servo.h> 
 
 int lastState = 0;
 int pos = 0;
 String inputString = ""; // a string to hold incoming data
 boolean stringComplete = false;
-Servo shotServo;
-#define PIN_SERVO (6)
 #define strokeMax (100)
 
 void setup() {
     Serial.begin(9600);           // set up Serial library at 9600 bps
-    Serial.println("Motors!");
+    Serial.println("REDY!");
 
     AFMS.begin();  // create with the default frequency 1.6KHz
     //AFMS.begin(1000);  // OR with a different frequency, say 1KHz
@@ -43,25 +31,23 @@ void setup() {
     inputString.reserve(200); // Hold 200 bytes for input string
 
     myMotor->setSpeed(10);  // 10 rpm  
-    shotServo.attach(PIN_SERVO);
 }
 
 void loop() {
-    Serial.println("Stepper test!");
     if(inputString == "1" && stringComplete){
         moveMotor();
+        inputString = "";
+        stringComplete = false;
     }
-    inputString = "";
-    stringComplete = false;
 }
 
 void moveMotor(){
     if(pos < 5){
-        Serial.println("Moving!");
+        Serial.println("MOVE");
         myMotor->step(LOC_OFF, BACKWARD, SINGLE); 
         pos++;
     } else {
-        Serial.println("Resetting!");
+        Serial.println("ZERO");
         myMotor->step((LOC_OFF * 5), FORWARD, SINGLE); 
         pos = 0;
     }
