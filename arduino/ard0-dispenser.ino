@@ -4,7 +4,10 @@ Servo shotServo;
 #define PIN_SERVO (8)
 #define PIN_RELAY (9)
 #define strokeMax (99)
- 
+
+boolean stringComplete = false;
+String inputString = ""; // a string to hold incoming data
+
 void SetStrokePerc(float strokePercentage)
 {
     if ( strokePercentage >= 1.0 && strokePercentage <= 99.0 )
@@ -22,6 +25,9 @@ void SetStrokeMM(int strokeReq)
 void setup() 
 { 
     pinMode(PIN_RELAY, OUTPUT);
+
+    inputString.reserve(200); // Hold 200 bytes for input string
+
     shotServo.attach(PIN_SERVO);
 } 
   
