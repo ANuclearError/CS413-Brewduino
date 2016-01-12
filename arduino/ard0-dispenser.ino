@@ -1,53 +1,40 @@
 #include <Servo.h> 
-  
+
+#define PIN_SERVO (9)
+#define PIN_RELAY (8)
+
 Servo shotServo;
-#define PIN_SERVO (8)
-#define PIN_RELAY (9)
-#define strokeMax (99)
 
-boolean stringComplete = false;
-String inputString = ""; // a string to hold incoming data
+String inputString = "";         // a string to hold incoming data
+boolean stringComplete = false;  // whether the string is complete
 
-void SetStrokePerc(float strokePercentage)
-{
-    if ( strokePercentage >= 1.0 && strokePercentage <= 99.0 )
-    {
-        int usec = 1000 + strokePercentage * ( 2000 - 1000 ) / 100.0 ;
-        shotServo.writeMicroseconds( usec );
-    }
-}
-void SetStrokeMM(int strokeReq)
-{
-    SetStrokePerc( ((float)strokeReq) / strokeMax );
+void setup() {
+  // initialize serial:
+  Serial.begin(9600);
+  // reserve 200 bytes for the inputString:
+  inputString.reserve(200);
+  digitalWrite(PIN_RELAY, LOW);
 }
 
- 
-void setup() 
-{ 
-    pinMode(PIN_RELAY, OUTPUT);
-
-    inputString.reserve(200); // Hold 200 bytes for input string
-
-    shotServo.attach(PIN_SERVO);
-} 
-  
- 
-void loop() 
-{
-    if(inputString == "1" && stringComplete){
+void loop() {
+  // print the string when a newline arrives:
+  if (stringComplete) {
+    if(inputString == "1"){
+        Serial.println("Dispensing Coffee!");
         dispenseCoffee();
-        inputString = "";
-        stringComplete = false;  
-    } else if (inputString == "2" && stringComplete){
+    } else if (inputString == "2"){
+        Serial.println("Dispensing Shot!");
         dispenseShot();
-        inputString = "";
-        stringComplete = false;  
-    } 
+    }
+    inputString = "";
+    stringComplete = false;
+  }
 }
+
 
 void dispenseShot(){
-    SetStrokePerc(63);
-    delay(5000);
+    SetStrokePerc(64);  
+    delay(6000);
     SetStrokePerc(40);
     delay(5000);
 }
@@ -59,18 +46,25 @@ void dispenseCoffee(){
     delay(5000);
 }
 
-void serialEvent() {
-    while (Serial.available()) {
-        if(inputString.length() > 50){
-            inputString = ""; // If size getting to large reset
-        }
-        // get the new byte:
-        char inChar = (char)Serial.read();
-        // add it to the inputString:
-        if (inChar == '\n') {
-            stringComplete = true;
-        } else {
-            inputString += inChar;
-        }
+
+void SetStrokePerc(float strokePercentage)
+{
+    if ( strokePercentage >= 1.0 && strokePercentage <= 99.0 )
+    {
+        int usec = 1000 + strokePercentage * ( 2000 - 1000 ) / 100.0 ;
+        shotServo.writeMicroseconds( usec );
     }
+}
+void serialEvent() {
+  while (Serial.available()) {
+    // get the new byte:
+    char inChar = (char)Serial.read();
+    // add it to the inputString:
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+    if(!stringComplete) {
+      inputString += inChar;
+    }
+  }
 }
