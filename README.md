@@ -7,6 +7,8 @@ Brewduino Server and machine allow for you to brew coffee the way you want.
 Brewduino is a group project for the Embdded Systems class CS413 in Computer
 Science, 2015-16 at the University of Strathclyde Glasgow.
 
+You can view the Brewduino website here: http://www.brewduino.wordpress.com
+
 ## Table of Contents
 
 - [Author](#author)
